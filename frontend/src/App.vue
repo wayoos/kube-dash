@@ -1,9 +1,19 @@
 <template lang="pug">
   #app
-    Sidebar
-    #main
-      Navbar
-      router-view
+    #wrapper.d-flex
+      Sidebar
+      #page-content-wrapper
+        nav(class="navbar navbar-expand-lg navbar-light bg-light border-bottom")
+          b-button(variant="primary")
+            b-icon(icon="list" aria-hidden="true")
+            span(class="sr-only") Help
+
+          button#menu-toggle(class="btn btn-primary") Toggle Menu
+          button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+
+        .container-fluid
+          router-view
 </template>
 
 <script>
@@ -20,24 +30,30 @@ export default {
 </script>
  
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body {
+  overflow-x: hidden;
 }
 
-#nav {
-  padding: 30px;
+#page-content-wrapper {
+  min-width: 100vw;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
   }
 }
 </style>
