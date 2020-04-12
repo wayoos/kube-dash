@@ -1,14 +1,20 @@
 <template lang="pug">
   #app
+    Sidebar
+    #main
+      Navbar
+      router-view
 </template>
 
 <script>
-import navbar from "@/components/navbar.vue";
+import Navbar from "@/components/Navbar.vue";
+import Sidebar from "@/components/Sidebar.vue";
 
 export default {
   name: "App",
   components: {
-    navbar
+    Navbar,
+    Sidebar
   }
 };
 </script>
