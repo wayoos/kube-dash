@@ -12,3 +12,5 @@ npx @vue/cli create frontend
 $HOME/.npm-packages/bin/vue add bootstrap-vue bootstrap
 
 $HOME/.npm-packages/bin/vue add router
+
+$HOME/.npm-packages/bin/vue add pug
