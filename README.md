@@ -17,4 +17,3 @@ $HOME/.npm-packages/bin/vue add pug
 
 ### Examples
 
-https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/index.html
