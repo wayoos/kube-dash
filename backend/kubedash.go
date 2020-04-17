@@ -1,18 +1,26 @@
 package main
 
 import (
-	"net/http"
-
 	"github.com/labstack/echo/v4"
+
+	"github.com/wayoos/kubedash/backend/kublink"
+	"github.com/wayoos/kubedash/backend/namespace"
 )
 
 func main() {
-	e := echo.New()
 
+	// access the API to list pods
+	//	pods, _ := clientset.CoreV1().Pods("").List(v1.ListOptions{})
+	//	fmt.Printf("There are %d pods in the cluster\n", len(pods.Items))
+
+	kublink.Connect()
+
+	e := echo.New()
 	e.Static("/", "frontend/dist")
 
-	e.GET("/api/hello", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-	e.Logger.Fatal(e.Start(":8000"))
+	apiGroup := e.Group("/api")
+
+	namespace.Routing(*apiGroup)
+
+	e.Logger.Fatal(e.Start("127.0.0.1:8000"))
 }
