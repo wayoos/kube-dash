@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import namespaces from './modules/namespaces'
 
 Vue.use(Vuex)
 
@@ -16,5 +17,6 @@ export default new Vuex.Store({
     toggleSidebar: ({ commit }) => commit('toggleSidebar')
   },
   modules: {
+    namespaces
   }
 })

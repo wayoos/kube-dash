@@ -15,5 +15,7 @@ $HOME/.npm-packages/bin/vue add router
 
 $HOME/.npm-packages/bin/vue add pug
 
+$HOME/.npm-packages/bin/vue add axios
+
 ### Examples
 
