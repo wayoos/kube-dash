@@ -20,7 +20,7 @@ export default {
     },
     mutations: {
         SET_COINS(state, coins) {
-            state.coins = coins
+            state.all = coins
         }
     }
 }

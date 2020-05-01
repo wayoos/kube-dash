@@ -9,10 +9,10 @@ export default {
   name: "HelloWorld",
   props: {
     msg: String
-  },
-  mounted() {
-    this.$store.dispatch("namespaces/loadCoins");
   }
+  //  mounted() {
+  //    this.$store.dispatch("namespaces/loadCoins");
+  //  }
 };
 </script>
 

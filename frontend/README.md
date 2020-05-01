@@ -31,3 +31,5 @@ https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/in
 https://blackrockdigital.github.io/startbootstrap-simple-sidebar/#
 
 https://medium.com/@pratheekhegde/displaying-application-breadcrumbs-in-vue-js-85456dc8a370
+
+https://bootstrapcreative.com/pattern/responsive-card-deck-example/

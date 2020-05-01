@@ -4,11 +4,16 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/namespaces',
+    name: 'Namespaces',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Namespaces.vue')
   },
   {
     path: '/about',
