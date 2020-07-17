@@ -1,6 +1,6 @@
 <template>
   <div>
-  hello
+  {{namespaces}}
     <b-form-input class="my-3" v-model="filter" type="search" placeholder="Search..."></b-form-input>
     <b-row cols="1" cols-sm="2" cols-md="3" cols-lg="4" cols-xl="5">
       <b-col class="mb-4" v-for="product in namespaces" :key="product.id">
