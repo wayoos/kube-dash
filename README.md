@@ -1,6 +1,6 @@
 Kube-dash
 =========
-
+Kubernetes dashboard
 
 Frontend
 --------
