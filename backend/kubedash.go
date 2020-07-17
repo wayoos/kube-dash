@@ -5,6 +5,8 @@ import (
 
 	"github.com/wayoos/kubedash/backend/kublink"
 	"github.com/wayoos/kubedash/backend/namespace"
+	"github.com/wayoos/kubedash/backend/deprecated"
+	
 )
 
 func main() {
@@ -21,6 +23,7 @@ func main() {
 	apiGroup := e.Group("/api")
 
 	namespace.Routing(*apiGroup)
+	deprecated.Routing(*apiGroup)
 
 	e.Logger.Fatal(e.Start("127.0.0.1:8000"))
 }

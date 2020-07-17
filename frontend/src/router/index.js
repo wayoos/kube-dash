@@ -16,6 +16,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/Namespaces.vue')
   },
   {
+    path: '/deprecated',
+    name: 'Deprecated',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Deprecated.vue')
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting

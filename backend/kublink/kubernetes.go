@@ -20,7 +20,7 @@ func Connect() {
 	// uses the current context in kubeconfig
 	// path-to-kubeconfig -- for example, /root/.kube/config
 	var err error
-	config, err = clientcmd.BuildConfigFromFlags("", "/Users/steph/.config/k3d/k3s-default/kubeconfig.yaml")
+	config, err = clientcmd.BuildConfigFromFlags("", "/Users/ralbasini/.config/k3d/k3s-default/kubeconfig.yaml")
 	if err != nil {
 		panic(err)
 	}

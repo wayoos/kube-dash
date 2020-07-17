@@ -3,11 +3,7 @@
   hello
     <b-form-input class="my-3" v-model="filter" type="search" placeholder="Search..."></b-form-input>
     <b-row cols="1" cols-sm="2" cols-md="3" cols-lg="4" cols-xl="5">
-      <b-col class="mb-4" v-for="product in namespaces" :key="product.id">
-        <b-card border-variant="success" :header="product.metadata.name" align="center">
-          <b-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</b-card-text>
-        </b-card>
-      </b-col>
+      {{ deprecated }}
     </b-row>
   </div>
 </template>
@@ -21,10 +17,10 @@ export default {
     };
   },
   computed: mapState({
-    namespaces: state => state.namespaces.all
+    deprecated: state => state.deprecated.all
   }),
   created() {
-    this.$store.dispatch("namespaces/loadCoins");
+    this.$store.dispatch("deprecated/loadCoins");
   }
 };
 </script>
