@@ -9,6 +9,8 @@ import (
 )
 
 var KUBECONFIG = "/Users/ralbasini/.config/k3d/k3s-default/kubeconfig.yaml"
+var USER = "ralbasini"
+var HOME = "/Users/ralbasini"
 
 var (
 	config    *restclient.Config

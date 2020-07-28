@@ -4,6 +4,7 @@ metadata:
   labels:
    run: nginx
   name: deploy-nginx
+  namespace: default
 spec:
   selector:
      matchLabels:
@@ -16,3 +17,4 @@ spec:
       containers:
       - image: nginx
         name: nginx
+        namespace: default

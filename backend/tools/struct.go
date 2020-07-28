@@ -2,16 +2,7 @@ package tools
 
 type ExtendedNs struct {
     Namespace   string
-    State		PlutoItems
-}
-
-type API struct {
-	Component       string `json:"component"`
-	Deprecated_in   string `json:"deprecated-in"`
-	Kind            string `json:"kind"`
-	Removed_in      string `json:"removed-in"`
-	Replacement_api string `json:"replacement-api"`
-	Version         string `json:"version"`
+    StateHelm	PlutoItems
 }
 
 type PlutoItems struct {
@@ -26,6 +17,7 @@ type PlutoItems struct {
 		} `json:"api"`
 		Deprecated bool   `json:"deprecated"`
 		Name       string `json:"name"`
+		Namespace  string `json:"namespace"`
 		Removed    bool   `json:"removed"`
 	} `json:"items"`
 	Target_versions struct {

@@ -5,7 +5,7 @@
     <b-row cols="1">
       <b-col class="mb-4" v-for="ns in deprecated" :key="ns">
         <b-card border-variant="success" :header="ns.Namespace" align="left">    
-          <b-table hover :fields="fields" :items="ns.State.items">
+          <b-table hover :fields="fields" :items="ns.StateHelm.items">
             <template v-slot:cell(api.version)="data">{{ data.value }}</template>
           </b-table>
           <!--<div v-for="item in ns.State.items" :key="item">
@@ -27,6 +27,7 @@ export default {
       filter: "",
       fields: [
         { key: 'name', label: 'name' },
+        { key: 'namespace', label: 'namespace' },
         { key: 'api.kind', label: 'kind' },
         { key: 'api.version', label: 'version' },
         { key: 'api.replacement-api', label: 'replacement-api' },

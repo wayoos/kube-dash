@@ -41,14 +41,16 @@ func runKubectl(cmd string) string {
 	return result
 }
 
-func runPluto() PlutoItems {
+func runPlutoHelm(ns string) PlutoItems {
 
 	// var plutoVersion = runCmd("pluto version | awk -F \"[: ]\" '{print $2}'")
 
-	// pluto detect-files -d /Users/ralbasini/Documents/iolab/kubedash/tmp_deployments -o json
-	cmd := "pluto detect-files -o json"
+	// cmd := "pluto detect-files -o json"
+	cmd := "pluto detect-helm -f tmp_deployments/policies/pluto-custom-deprecated.yaml -o json -n " + ns
 	cmd_config := exec.Command("/bin/bash", "-c", cmd)
 	cmd_config.Env = append(cmd_config.Env, "KUBECONFIG="+ kublink.KUBECONFIG)
+	cmd_config.Env = append(cmd_config.Env, "USER="+ kublink.USER)
+	cmd_config.Env = append(cmd_config.Env, "HOME="+ kublink.HOME)
 	out, err := cmd_config.Output()
 
 	if err != nil {
@@ -72,7 +74,7 @@ func getDeprecatedPluto(ns v1.Namespace) PlutoItems {
 	nsName := ns.ObjectMeta.Name
 	fmt.Println("\n[Checking resources in ns " + nsName + "]")
 	
-	var plutoResult = runPluto()
+	var plutoResult = runPlutoHelm(nsName)
 
 	return plutoResult
 }
@@ -85,7 +87,7 @@ func AnalyzeDeprecatedResources(ns *v1.NamespaceList) []ExtendedNs {
 	for _, element := range ns.Items {
 		current := ExtendedNs{
 			Namespace:    element.GetName(),
-			State:  getDeprecatedPluto(element), 
+			StateHelm:  getDeprecatedPluto(element), 
 		}
 
 		extendedNs = append(extendedNs, current)
