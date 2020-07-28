@@ -2,12 +2,13 @@ package kublink
 
 import (
 	"fmt"
-
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	restclient "k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 )
+
+var KUBECONFIG = "/Users/ralbasini/.config/k3d/k3s-default/kubeconfig.yaml"
 
 var (
 	config    *restclient.Config
@@ -20,7 +21,7 @@ func Connect() {
 	// uses the current context in kubeconfig
 	// path-to-kubeconfig -- for example, /root/.kube/config
 	var err error
-	config, err = clientcmd.BuildConfigFromFlags("", "/Users/ralbasini/.config/k3d/k3s-default/kubeconfig.yaml")
+	config, err = clientcmd.BuildConfigFromFlags("", KUBECONFIG)
 	if err != nil {
 		panic(err)
 	}

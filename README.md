@@ -19,3 +19,6 @@ $HOME/.npm-packages/bin/vue add axios
 
 ### Examples
 
+### TODO
+
+- In tools.go, fix runCmd() function. Executing `runCmd("kubectl")`, `runCmd("pluto version")` work fine. `runCmd("kubectl version")` times out.

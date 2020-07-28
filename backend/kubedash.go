@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 
 	"github.com/wayoos/kubedash/backend/kublink"
-	_ "github.com/wayoos/kubedash/backend/namespace"
+	"github.com/wayoos/kubedash/backend/namespace"
 	"github.com/wayoos/kubedash/backend/deprecated"
 	
 )
@@ -22,7 +22,7 @@ func main() {
 
 	apiGroup := e.Group("/api")
 
-	// namespace.Routing(*apiGroup)
+	namespace.Routing(*apiGroup)
 	deprecated.Routing(*apiGroup)
 
 	e.Logger.Fatal(e.Start("127.0.0.1:8000"))
