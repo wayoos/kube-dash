@@ -4,14 +4,11 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"encoding/json"
 	v1 "k8s.io/api/core/v1"
 	"github.com/wayoos/kubedash/backend/kublink"
+	// "github.com/wayoos/kubedash/tools/struct"
 )
-
-type ExtendedNs struct {
-    Namespace   string
-    State		string
-}
 
 func runCmd(cmd string) string {
 
@@ -44,18 +41,40 @@ func runKubectl(cmd string) string {
 	return result
 }
 
-func getDeprecatedPluto(ns v1.Namespace) string {
-	nsName := ns.ObjectMeta.Name
-	fmt.Println("\n[Checking resources in ns " + nsName + "]")
+func runPluto() PlutoItems {
 
 	// var plutoVersion = runCmd("pluto version | awk -F \"[: ]\" '{print $2}'")
-	// fmt.Println(plutoVersion)
 
-	// TODO support pluto command
-	var plutoResult = runKubectl("pluto detect-helm -n " + nsName)
+	// pluto detect-files -d /Users/ralbasini/Documents/iolab/kubedash/tmp_deployments -o json
+	cmd := "pluto detect-files -o json"
+	cmd_config := exec.Command("/bin/bash", "-c", cmd)
+	cmd_config.Env = append(cmd_config.Env, "KUBECONFIG="+ kublink.KUBECONFIG)
+	out, err := cmd_config.Output()
+
+	if err != nil {
+			fmt.Printf("Failed to execute pluto command: [%s]\n", cmd)
+			fmt.Println(err)
+	} 
+
+	fmt.Println("Pluto executed")
+	fmt.Println(string(out))
+
+	data := &PlutoItems{}
+	err = json.Unmarshal(out, data)
+
+	fmt.Println("Struct created")
+	fmt.Println(data) 
+
+	return *data
+}
+
+func getDeprecatedPluto(ns v1.Namespace) PlutoItems {
+	nsName := ns.ObjectMeta.Name
+	fmt.Println("\n[Checking resources in ns " + nsName + "]")
+	
+	var plutoResult = runPluto()
 
 	return plutoResult
-	// return plutoVersion
 }
 
 func AnalyzeDeprecatedResources(ns *v1.NamespaceList) []ExtendedNs {
