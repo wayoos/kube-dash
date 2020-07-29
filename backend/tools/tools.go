@@ -2,6 +2,8 @@ package tools
 
 import (
 	"fmt"
+	"errors"
+	"strings"
 	"os"
 	"os/exec"
 	"encoding/json"
@@ -41,41 +43,58 @@ func runKubectl(cmd string) string {
 	return result
 }
 
+func analyzeError(out string, err error, cmd string) string {
+
+	switch errMsg := err.Error(); errMsg {
+	case errors.New("exit status 127").Error():
+		fmt.Printf("Failed to execute command: [%s]\n", cmd)
+		fmt.Printf("Error. Result : \n" + out)
+		return "Error. Command not found"
+	case errors.New("exit status 3").Error():
+		fmt.Printf("Warning. Result : \n" + out)
+		return "Exit status 3"
+	default:
+		fmt.Printf("Failed to execute command: [%s]\n", cmd)
+		fmt.Println("Error : " + err.Error())
+		return "Unknown error"
+	}
+}
+
 func runPlutoHelm(ns string) PlutoItems {
 
+	// Computing plutoVersion
 	// var plutoVersion = runCmd("pluto version | awk -F \"[: ]\" '{print $2}'")
 
-	// cmd := "pluto detect-files -o json"
 	cmd := "pluto detect-helm -f tmp_deployments/policies/pluto-custom-deprecated.yaml -o json -n " + ns
-	cmd_config := exec.Command("/bin/bash", "-c", cmd)
+	// cmd_config := exec.Command("/bin/bash", "-c", cmd)
+
+	app := "plutos"
+	args := []string{"detect-helm", "-f", "tmp_deployments/policies/pluto-custom-deprecated.yaml", "-o", "json", "-n", ns}
+	cmd = app + " " + strings.Join(args, " ")
+	cmd_config := exec.Command(app, args...)
 	cmd_config.Env = append(cmd_config.Env, "KUBECONFIG="+ kublink.KUBECONFIG)
 	cmd_config.Env = append(cmd_config.Env, "USER="+ kublink.USER)
 	cmd_config.Env = append(cmd_config.Env, "HOME="+ kublink.HOME)
 	out, err := cmd_config.Output()
 
 	if err != nil {
-			fmt.Printf("Failed to execute pluto command: [%s]\n", cmd)
-			fmt.Println(err)
+		fmt.Println(analyzeError(string(out), err, cmd))
 	} 
-
-	fmt.Println("Pluto executed")
-	fmt.Println(string(out))
 
 	data := &PlutoItems{}
 	err = json.Unmarshal(out, data)
-
-	fmt.Println("Struct created")
-	fmt.Println(data) 
+	fmt.Printf("%+v\n", data)
 
 	return *data
 }
 
 func getDeprecatedPluto(ns v1.Namespace) PlutoItems {
 	nsName := ns.ObjectMeta.Name
-	fmt.Println("\n[Checking resources in ns " + nsName + "]")
+	fmt.Println("[Checking resources in ns " + nsName + "]")
 	
 	var plutoResult = runPlutoHelm(nsName)
 
+	fmt.Println()
 	return plutoResult
 }
 

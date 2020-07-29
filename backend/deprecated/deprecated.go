@@ -23,6 +23,7 @@ func deprecated(c echo.Context) error {
 
 	ens := tools.AnalyzeDeprecatedResources(ns)
 
+	fmt.Println("Deprecated resources collected :")
 	fmt.Println(ens)
 
 	return c.JSON(http.StatusOK, ens)
