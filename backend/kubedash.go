@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/labstack/echo/v4"
+	"fmt"
 
 	"github.com/wayoos/kubedash/backend/kublink"
 	"github.com/wayoos/kubedash/backend/namespace"
@@ -9,13 +10,18 @@ import (
 	
 )
 
+var KUBECONFIG = "/Users/ralbasini/.config/k3d/k3s-default/kubeconfig.yaml"
+// var KUBECONFIG = "./kubeconfig.yaml" // For docker-compose
+
 func main() {
+
+	fmt.Println("KUBECONFIG from main: " + KUBECONFIG)
 
 	// access the API to list pods
 	//	pods, _ := clientset.CoreV1().Pods("").List(v1.ListOptions{})
 	//	fmt.Printf("There are %d pods in the cluster\n", len(pods.Items))
 
-	kublink.Connect()
+	kublink.Connect(KUBECONFIG)
 
 	e := echo.New()
 	e.Static("/", "frontend/dist")

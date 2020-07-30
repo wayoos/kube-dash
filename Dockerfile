@@ -16,16 +16,24 @@ FROM golang:1.14.2 AS backend
 WORKDIR /go/src/app
 COPY ./backend ./backend
 COPY ./go.* ./
+COPY ./backend/tmp_deployments/kubeconfig.yaml ./
 
 RUN ls -l
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' backend/kubedash.go
+ARG kubeconfig
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags "-X main.Kubeconfig=$kubeconfig" backend/kubedash.go
 
 #--------------------------------------
 FROM alpine:3.11.5
 RUN adduser --disabled-password --no-create-home kubedash
+RUN apk add --no-cache bash
 COPY --from=backend go/src/app/kubedash /
 
 COPY --from=frontend app/dist /frontend/dist
+
+COPY ./backend/tmp_deployments/kubeconfig.yaml ./kubeconfig.yaml
+
+COPY --from=lachlanevenson/k8s-kubectl:v1.10.3 /usr/local/bin/kubectl /usr/local/bin/kubectl
+RUN chmod a+rx /usr/local/bin/kubectl
 
 USER kubedash
 EXPOSE 8000

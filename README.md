@@ -17,8 +17,10 @@ $HOME/.npm-packages/bin/vue add pug
 
 $HOME/.npm-packages/bin/vue add axios
 
-### Examples
+### Build
+
+`docker build --tag kubedash:latest --build-arg Test="123" .; docker run kubedash`
 
 ### TODO
 
-- In tools.go, fix runCmd() function. Executing `runCmd("kubectl")`, `runCmd("pluto version")` work fine. `runCmd("kubectl version")` times out.
+

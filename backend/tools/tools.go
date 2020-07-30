@@ -68,7 +68,7 @@ func runPlutoHelm(ns string) PlutoItems {
 	cmd := "pluto detect-helm -f tmp_deployments/policies/pluto-custom-deprecated.yaml -o json -n " + ns
 	// cmd_config := exec.Command("/bin/bash", "-c", cmd)
 
-	app := "plutos"
+	app := "pluto"
 	args := []string{"detect-helm", "-f", "tmp_deployments/policies/pluto-custom-deprecated.yaml", "-o", "json", "-n", ns}
 	cmd = app + " " + strings.Join(args, " ")
 	cmd_config := exec.Command(app, args...)
