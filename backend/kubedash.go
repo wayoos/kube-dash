@@ -31,5 +31,5 @@ func main() {
 	namespace.Routing(*apiGroup)
 	deprecated.Routing(*apiGroup)
 
-	e.Logger.Fatal(e.Start("127.0.0.1:8000"))
+	e.Logger.Fatal(e.Start("127.0.0.1:8008"))
 }

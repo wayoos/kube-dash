@@ -3,7 +3,7 @@ package kublink
 import (
 	"fmt"
 	_"os"
-	"os/exec"
+	_"os/exec"
 	_"strings"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -12,8 +12,8 @@ import (
 )
 
 var KUBECONFIG = ""
-// var USER = "ralbasini"
-// var HOME = "/Users/ralbasini"
+var USER = "ralbasini"
+var HOME = "/Users/ralbasini"
 
 var (
 	config    *restclient.Config
@@ -25,13 +25,15 @@ func Connect(Kubeconfig_imported string) {
 
 	KUBECONFIG = Kubeconfig_imported
 
-	out2, err2 := exec.Command("/bin/bash","-c", "echo " + KUBECONFIG).Output()
+	// c := exec.Command("curl", "https://0.0.0.0:6443")
+	// c.Stdout = os.Stdout
+	// c.Stderr = os.Stderr
+	// err2 := c.Run()
+	// if err2 != nil {
+	// 	fmt.Println("Error: ", err2)
+	// }
 
-	if err2 != nil {
-			fmt.Printf("Failed to execute kubectl command")
-	}
-
-	fmt.Println(string(out2))
+	// fmt.Println(string(output))
 
 	// uses the current context in kubeconfig
 	// path-to-kubeconfig -- for example, /root/.kube/config
@@ -52,7 +54,7 @@ func Connect(Kubeconfig_imported string) {
 	if err != nil {
 		panic(err.Error())
 	}
-	fmt.Printf("There are %d pods in the cluster\n", len(pods.Items))
+	fmt.Printf("Init... There are %d pods in the cluster\n", len(pods.Items))
 
 }
 

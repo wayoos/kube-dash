@@ -19,8 +19,8 @@ COPY ./go.* ./
 COPY ./backend/tmp_deployments/kubeconfig.yaml ./
 
 RUN ls -l
-ARG kubeconfig
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags "-X main.Kubeconfig=$kubeconfig" backend/kubedash.go
+ARG KUBE_CONFIG
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags "-X main.KUBECONFIG=$KUBE_CONFIG" backend/kubedash.go
 
 #--------------------------------------
 FROM alpine:3.11.5
@@ -36,6 +36,6 @@ COPY --from=lachlanevenson/k8s-kubectl:v1.10.3 /usr/local/bin/kubectl /usr/local
 RUN chmod a+rx /usr/local/bin/kubectl
 
 USER kubedash
-EXPOSE 8000
+EXPOSE 8008/tcp
 
 ENTRYPOINT ["/kubedash"]

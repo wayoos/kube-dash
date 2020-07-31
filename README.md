@@ -19,7 +19,7 @@ $HOME/.npm-packages/bin/vue add axios
 
 ### Build
 
-`docker build --tag kubedash:latest --build-arg Test="123" .; docker run kubedash`
+`docker build --tag kubedash:latest --build-arg KUBE_CONFIG=./kubeconfig.yaml .; docker run --network="host" --publish 8008:8008 kubedash`
 
 ### TODO
 
