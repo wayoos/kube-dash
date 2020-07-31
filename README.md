@@ -23,4 +23,6 @@ $HOME/.npm-packages/bin/vue add axios
 
 ### TODO
 
+- When exec `docker-compose up`, backend can't get a connection with frontend. "Proxy error: Could not proxy request /api/namespaces from localhost:8080 to http://localhost:8008."
+- Backend must be ran with --network=host flag, otherwise can't establish connection with cluster. Might come from the kubeconfig.yaml config
 

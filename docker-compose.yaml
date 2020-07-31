@@ -6,6 +6,15 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        KUBE_CONFIG: ./kubeconfig.yaml
     ports:
       - "8008:8008"
 
+  frontend:
+    build:
+      context: .
+      target: 'frontend'
+    ports:
+      - "8080:8080"
+    command: /bin/sh -c "yarn serve"

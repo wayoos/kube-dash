@@ -48,6 +48,7 @@ func Connect(Kubeconfig_imported string) {
 		panic(err)
 	}
 
+	fmt.Println("Checking connection with host...")
 	// get pods in all the namespaces by omitting namespace
 	// Or specify namespace to get pods in particular namespace
 	pods, err := clientset.CoreV1().Pods("").List(metav1.ListOptions{})
