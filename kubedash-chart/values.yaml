@@ -1,0 +1,21 @@
+environment: dev
+product: kub
+
+registry: docker.tmp.io
+
+image:
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  hosts:
+    - host: kubedash.local
+      paths: []
+
+resources: {}
+
+frontend:
+  enabled: false

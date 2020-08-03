@@ -1,15 +1,15 @@
-# #--------------------------------------
-# FROM node:13.12.0 AS frontend
+#--------------------------------------
+FROM node:13.12.0 AS frontend
 
-# RUN yarn global add @vue/cli@4.3.1
+RUN yarn global add @vue/cli@4.3.1
 
-# COPY ./frontend /app
-# WORKDIR /app
-# RUN ls -l
-# COPY ./frontend/package.json /app
+COPY ./frontend /app
+WORKDIR /app
+RUN ls -l
+COPY ./frontend/package.json /app
 
-# RUN yarn install
-# RUN yarn build
+RUN yarn install
+RUN yarn build
 
 #--------------------------------------
 FROM golang:1.14.2 AS backend
@@ -27,7 +27,7 @@ FROM alpine:3.11.5
 RUN adduser --disabled-password --no-create-home kubedash
 RUN apk add --no-cache bash
 COPY --from=backend go/src/app/kubedash /
-# COPY --from=frontend app/dist /frontend/dist
+COPY --from=frontend app/dist /frontend/dist
 
 COPY ./backend/tmp_deployments/kubeconfig.yaml ./kubeconfig.yaml
 

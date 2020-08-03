@@ -3,13 +3,16 @@ services:
 
   kubedash:
     image: kubedash:latest
+    network_mode: "host"
     build:
       context: .
       dockerfile: Dockerfile
       args:
         KUBE_CONFIG: ./kubeconfig.yaml
-    ports:
-      - "8008:8008"
+    # ports:
+    #   - "8008:8008"
+    # expose:
+    #   - "8008"
 
   frontend:
     build:

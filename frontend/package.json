@@ -50,6 +50,11 @@
     },
     "rules": {}
   },
+  "proxy": {
+    "/api/namespaces": {
+      "target": "http://127.0.0.1:8008/"
+    }
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
