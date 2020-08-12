@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Deprecated from '../views/Deprecated.vue'
 
 Vue.use(VueRouter)
 
@@ -18,7 +19,15 @@ const routes = [
   {
     path: '/deprecated',
     name: 'Deprecated',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Deprecated.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Deprecated.vue'),
+    children: [
+      {
+        // `UserProfile` va être rendu à l'intérieur du `<router-view>` de `User`
+        // quand `/utilisateur/:id/profil` concorde
+        path: ':id',
+        component: Deprecated
+      }
+    ]
   },
   {
     path: '/about',

@@ -1,16 +1,17 @@
 package main
 
 import (
-	"github.com/labstack/echo/v4"
 	"fmt"
 
+	"github.com/labstack/echo/v4"
+
+	"github.com/wayoos/kubedash/backend/deprecated"
 	"github.com/wayoos/kubedash/backend/kublink"
 	"github.com/wayoos/kubedash/backend/namespace"
-	"github.com/wayoos/kubedash/backend/deprecated"
-	
 )
 
-var KUBECONFIG = "/Users/ralbasini/.config/k3d/k3s-default/kubeconfig.yaml"
+var KUBECONFIG = "/Users/ralbasini/.config/k3d/k3s-default/tmp.yaml"
+
 // var KUBECONFIG = "./kubeconfig.yaml" // For docker-compose
 
 func main() {

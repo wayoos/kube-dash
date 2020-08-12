@@ -2,9 +2,10 @@ package kublink
 
 import (
 	"fmt"
-	_"os"
-	_"os/exec"
-	_"strings"
+	_ "os"
+	_ "os/exec"
+	_ "strings"
+
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	restclient "k8s.io/client-go/rest"
@@ -24,6 +25,7 @@ var (
 func Connect(Kubeconfig_imported string) {
 
 	KUBECONFIG = Kubeconfig_imported
+	// KUBECONFIG = "/Users/ralbasini/Documents/iolab/kubedash/kubeconfig.yaml"
 
 	// c := exec.Command("curl", "https://0.0.0.0:6443")
 	// c.Stdout = os.Stdout

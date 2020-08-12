@@ -1,8 +1,11 @@
 <template>
+  <!-- <div>User {{ $route.params.id }}</div> -->
   <div>
-  <h1>List of deprecated resources </h1>
+  <h1>Deprecated resources</h1>
+  <p>This page lists the potential deprecated resources on the various namespaces of the cluster.</p>
+  <p>In order to guarantee a smooth run of the applications, please correct as soon as possible all elements listed below.</p>
     <b-row cols="1">
-      <b-col class="mb-4" v-for="ns in deprecated" :key="ns">
+      <b-col class="mb-4" v-for="ns in filterNamespaces(deprecated, $route.params.id)" :key="ns">
         <b-card v-bind:class="{ 'border-warning' : ns.StateHelm.items, 'border-success' : !ns.StateHelm.items }" align="left"> 
           <template v-slot:header>
             namespace : <strong>{{ns.Namespace}}</strong>
@@ -42,6 +45,20 @@ export default {
   }),
   created() {
     this.$store.dispatch("deprecated/loadCoins");
-  }
+  },
+  methods: {
+    filterNamespaces(arr, filt) {
+      console.log(arr)
+      console.log("Filt : [" + filt + "]")
+      if (filt != null) {
+        console.log("not null")
+        return arr.filter((x) => x.Namespace == filt);
+      } else {
+        console.log("all")
+        return arr
+      }
+      
+    },
+  },
 };
 </script>
