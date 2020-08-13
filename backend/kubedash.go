@@ -10,7 +10,7 @@ import (
 	"github.com/wayoos/kubedash/backend/namespace"
 )
 
-var KUBECONFIG = "/Users/ralbasini/.config/k3d/k3s-default/tmp.yaml"
+var KUBECONFIG = "/Users/ralbasini/.config/k3d/k3s-default/kubeconfig-rmkube.yaml"
 
 // var KUBECONFIG = "./kubeconfig.yaml" // For docker-compose
 
