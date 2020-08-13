@@ -2,9 +2,20 @@ version: "3.7"
 services:
 
   kubedash:
+    image: kubedash:latest
+    network_mode: "host"
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
+      args:
+        KUBE_CONFIG: ./kubeconfig.yaml
+    ports: 
+      - "8008:8008"
 
+  frontend:
+    build:
+      context: .
+      target: 'frontend'
+    ports:
+      - "8080:8080"
+    command: /bin/sh -c "yarn serve"

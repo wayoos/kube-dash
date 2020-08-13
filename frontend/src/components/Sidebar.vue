@@ -4,6 +4,7 @@
     div(class="list-group list-group-flush")
       router-link(class="list-group-item list-group-item-action bg-light" to="/") Dashboard
       router-link(class="list-group-item list-group-item-action bg-light" to="/namespaces") Namespaces
+      router-link(class="list-group-item list-group-item-action bg-light" to="/deprecated") Deprecated
       router-link(class="list-group-item list-group-item-action bg-light" to="/about") About
 
       .sidebar-heading Externals
